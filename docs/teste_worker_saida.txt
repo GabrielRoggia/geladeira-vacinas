@@ -1,0 +1,28 @@
+PASS sem token -> 401
+PASS token falso -> 401
+PASS disp diferente do token -> 400
+PASS temp 200 C -> 400
+PASS ts no futuro -> 400
+PASS leitura valida -> 200
+PASS lote da fila gravado
+PASS reenvio nao duplica
+PASS lote >100 -> 400
+PASS resumo sem token -> 401
+PASS resumo: 7 min fora e 2 falhas
+PASS resumo: sempre_na_faixa = false
+PASS resumo: vindas da fila
+   total: {'leituras': 91, 'min_c': 5, 'max_c': 9, 'media_c': 5.31, 'min_fora_faixa': 7, 'min_sensor_falha': 2, 'vindas_da_fila': 88, 'esperado': 1440, 'cobertura_pct': 6.3}
+   1a hora: {'hora': '2026-11-10 18:00', 'leituras': 57, 'min_c': 5, 'max_c': 9, 'media_c': 5.49, 'min_fora_faixa': 7, 'min_sensor_falha': 0, 'min_porta_aberta': 0}
+PASS disp com SQL -> 400
+PASS alerta 1 passa, 2o segurado pelo cooldown
+PASS tipo de alerta desconhecido -> 400
+PASS alertas gravados no D1 (2)
+PASS config absurda -> 400
+PASS dispositivo nao altera config -> 401
+PASS config valida -> 200
+PASS ESP32 le config do KV
+PASS ultimo estado no KV
+PASS painel servido em /
+PASS cron vigia offline roda
+
+24 passaram, 0 falharam

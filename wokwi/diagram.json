@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "author": "Grupo - Geladeira de Vacinas",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht", "top": -105, "left": 210, "attrs": { "temperature": "5", "humidity": "60" } },
+    { "type": "wokwi-hc-sr04", "id": "porta", "top": -130, "left": -230, "attrs": { "distance": "4" } },
+    { "type": "wokwi-buzzer", "id": "sirene", "top": 160, "left": 230, "attrs": { "volume": "0.3" } },
+    { "type": "wokwi-led", "id": "ledr", "top": 40, "left": 300, "attrs": { "color": "red" } },
+    { "type": "wokwi-led", "id": "ledg", "top": 40, "left": 350, "attrs": { "color": "green" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": 120, "left": 290, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r2", "top": 120, "left": 340, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-pushbutton", "id": "btn", "top": 240, "left": -170, "attrs": { "color": "yellow", "label": "silenciar" } }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "dht:VCC", "esp:3V3", "red", [] ],
+    [ "dht:GND", "esp:GND.2", "black", [] ],
+    [ "dht:SDA", "esp:15", "green", [] ],
+    [ "porta:VCC", "esp:5V", "red", [] ],
+    [ "porta:GND", "esp:GND.1", "black", [] ],
+    [ "porta:TRIG", "esp:5", "orange", [] ],
+    [ "porta:ECHO", "esp:18", "purple", [] ],
+    [ "sirene:1", "esp:GND.3", "black", [] ],
+    [ "sirene:2", "esp:26", "yellow", [] ],
+    [ "ledr:A", "esp:25", "red", [] ],
+    [ "ledr:C", "r1:1", "black", [] ],
+    [ "r1:2", "esp:GND.3", "black", [] ],
+    [ "ledg:A", "esp:27", "green", [] ],
+    [ "ledg:C", "r2:1", "black", [] ],
+    [ "r2:2", "esp:GND.3", "black", [] ],
+    [ "btn:1.l", "esp:14", "blue", [] ],
+    [ "btn:2.l", "esp:GND.1", "black", [] ]
+  ],
+  "dependencies": {}
+}

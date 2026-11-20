@@ -1,0 +1,8 @@
+# segredos
+firmware/geladeira/secrets.h
+worker/.dev.vars
+.env
+# gerados
+worker/node_modules/
+worker/.wrangler/
+build/

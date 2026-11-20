@@ -1,0 +1,38 @@
+name = "geladeira-vacinas"
+main = "src/index.js"
+compatibility_date = "2025-09-01"
+
+# Painel (src/painel.html) embutido como texto e servido em "/"
+rules = [{ type = "Text", globs = ["**/*.html"], fallthrough = true }]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "geladeira-db"
+database_id = "c5b2198e-9a20-40d4-b1e9-235db5aa2afa"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "59a22d0775014a91af17f723b447f577"
+
+# Broker MQTT dentro da Cloudflare (Durable Object com SQLite, plano gratis)
+[[durable_objects.bindings]]
+name = "BROKER"
+class_name = "Broker"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Broker"]
+
+[vars]
+RETENCAO_DIAS = "1825"     # 5 anos de leituras brutas (ajustar a norma do posto)
+OFFLINE_MIN = "10"         # sem leitura por 10 min = dispositivo offline
+COOLDOWN_S = "900"         # mesmo alerta no Telegram no maximo 1x a cada 15 min
+
+[triggers]
+crons = ["*/5 * * * *", "0 6 * * *"]   # vigia offline a cada 5 min; limpeza diaria (03h BRT)
+
+# Senhas e tokens NUNCA ficam aqui nem no GitHub. No KV vao so hashes SHA-256:
+#   dev:<sha256 do token>   -> "gel01"         (token HTTP da geladeira)
+#   mqtt:user:<usuario>     -> {sha256, pub, sub}  (usuarios e ACL do broker)
+#   painel:sha256           -> hash da senha do painel
+# Opcionais (wrangler secret put): TELEGRAM_TOKEN, TELEGRAM_CHAT_ID

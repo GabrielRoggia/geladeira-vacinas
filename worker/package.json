@@ -1,0 +1,10 @@
+{
+  "name": "geladeira-vacinas-worker",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:init": "wrangler d1 execute geladeira-db --remote --file=schema.sql"
+  },
+  "devDependencies": { "wrangler": "^4.0.0" }
+}

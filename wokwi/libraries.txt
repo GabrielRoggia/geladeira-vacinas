@@ -1,0 +1,6 @@
+# Wokwi Library Manager
+WebSockets
+MQTTPubSubClient
+ArduinoJson
+DHT sensor library
+Adafruit Unified Sensor
